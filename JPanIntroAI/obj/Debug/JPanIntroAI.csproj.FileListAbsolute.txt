@@ -1,0 +1,7 @@
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\JPanIntroAI\JPanIntroAI\obj\Debug\JPanIntroAI.csprojAssemblyReference.cache
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\JPanIntroAI\JPanIntroAI\obj\Debug\JPanIntroAI.csproj.CoreCompileInputs.cache
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\JPanIntroAI\JPanIntroAI\bin\Debug\JPanIntroAI.exe.config
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\JPanIntroAI\JPanIntroAI\bin\Debug\JPanIntroAI.exe
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\JPanIntroAI\JPanIntroAI\bin\Debug\JPanIntroAI.pdb
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\JPanIntroAI\JPanIntroAI\obj\Debug\JPanIntroAI.exe
+\\GMRDC1\Folder Redirection\Johnny.Pan\Documents\JPanIntroAI\JPanIntroAI\obj\Debug\JPanIntroAI.pdb
