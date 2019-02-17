@@ -149,16 +149,21 @@ namespace JPanIntroAI
                 new double[] {1,0},
                 new double[] {1,1},
             };
-            double[] outputs = new double[] { 0, 0, 0, 1 };
+            double[] andOutputs = new double[] { 0, 0, 0, 1 };
+
+            Perceptron orGate = new Perceptron(2);
+            double[] orOutputs = new double[] { 0, 1, 1, 1 };
+
+
 
             int epoch = 0;
-            while (andGate.MAE(inputs, outputs) > 0)
+            while (orGate.MAE(inputs, orOutputs) > 0)
             {
-                andGate.TrainAll(inputs, outputs);
+                orGate.TrainAll(inputs, orOutputs);
                 Console.WriteLine($"{epoch}");
                 for (int i = 0; i < inputs.Length; i++)
                 {
-                    Console.WriteLine($"{inputs[i][0]} & {inputs[i][1]} = {andGate.Compute(inputs[i])}");
+                    Console.WriteLine($"{inputs[i][0]} & {inputs[i][1]} = {orGate.Compute(inputs[i])}");
                 }
                 Console.WriteLine();
 
@@ -167,7 +172,7 @@ namespace JPanIntroAI
 
             for (int i = 0; i < inputs.Length; i++)
             {
-                Console.WriteLine($"{inputs[i][0]} & {inputs[i][1]} = {andGate.Compute(inputs[i])}");
+                Console.WriteLine($"{inputs[i][0]} & {inputs[i][1]} = {orGate.Compute(inputs[i])}");
             }
             Console.ReadKey();
             #endregion
