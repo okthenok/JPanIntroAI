@@ -88,6 +88,8 @@ namespace JPanIntroAI
     {
         static Random rand = new Random();
 
+        #region HillClimbing functions
+        /*
         //mutate: return mutated string
         static StringBuilder Mutate(string input)
         {
@@ -111,6 +113,10 @@ namespace JPanIntroAI
             return absError / current.Length;
         }
         //compute: calculate output of perceptron
+        */
+        #endregion
+
+
 
         static void Main(string[] args)
         {
@@ -140,6 +146,7 @@ namespace JPanIntroAI
             //}
             #endregion
             #region Perceptron
+            /*
             Perceptron andGate = new Perceptron(2);
 
             double[][] inputs = new double[][]
@@ -175,8 +182,70 @@ namespace JPanIntroAI
                 Console.WriteLine($"{inputs[i][0]} & {inputs[i][1]} = {orGate.Compute(inputs[i])}");
             }
             Console.ReadKey();
+            */
             #endregion
+            #region Feed Foward Neural Network
+            Network[] population = new Network[100];
+            for (int i = 0; i < 100; i++)
+            {
+                population[i] = new Network(a => 1 / (1 + Math.Exp(-a)), 2, 2, 1);
+            }
+            double[][] inputs = new double[][]
+            {
+                new double[] {0, 0},
+                new double[] {0, 1},
+                new double[] {1, 0},
+                new double[] {1, 1},
+            };
+            double[][] xorOutputs = new double[][]
+            {
+                new double[] {0},
+                new double[] {1},
+                new double[] {1},
+                new double[] {0},
+            };
 
+            int epoch = 0;
+            do
+            {
+                epoch++;
+
+                int cut = (int)(population.Length * 0.90);
+                for (int i = 1; i < cut; i++)
+                {
+                    population[i].Mutate(rand, 1);
+                }
+                for (int i = cut; i < population.Length; i++)
+                {
+                    population[i].Randomize(rand);
+                }
+
+                Array.Sort(population, (a, b) => a.MAE(inputs, xorOutputs).CompareTo(b.MAE(inputs, xorOutputs)));
+
+                Console.SetCursorPosition(0, 0);
+                for (int i = 0; i < inputs.Length; i++)
+                {
+                    Console.Write("[ ");
+                    for (int j = 0; j < inputs[i].Length; j++)
+                    {
+                        Console.Write($"{inputs[i][j]} ");
+                    }
+                    Console.Write("] = [ ");
+                    double[] output = population[0].Compute(inputs[i]);
+                    for (int j = 0; j < output.Length; j++)
+                    {
+                        Console.Write($"{output[j]:#.00} ");
+                    }
+                    Console.WriteLine("]");
+                }
+                Console.WriteLine($"Gen: {epoch}");
+
+            } while (population[0].MAE(inputs, xorOutputs) > 0);
+
+            //run the network to test it
+
+            ;
+            #endregion
         }
     }
 }
