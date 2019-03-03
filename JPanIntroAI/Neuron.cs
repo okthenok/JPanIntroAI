@@ -13,7 +13,7 @@ namespace JPanIntroAI
         public double Output;
         public Func<double, double> Activation;
 
-        public Neuron(Func<double, double> activation, int inputCount )
+        public Neuron(Func<double, double> activation, int inputCount)
         {
             Activation = activation;
             Weights = new double[inputCount];
@@ -30,12 +30,15 @@ namespace JPanIntroAI
 
         public double Compute(double[] input)
         {
-            double output = 0;
+            Output = 0;
             for (int i = 0; i < input.Length; i++)
             {
-                output += input[i] * Weights[i];
+                Output += input[i] * Weights[i];
             }
-            return output;
+
+            Output = Activation(Output + Bias);
+
+            return Output;
         }
     }
 }

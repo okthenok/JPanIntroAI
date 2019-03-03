@@ -12,5 +12,10 @@ namespace JPanIntroAI
         {
             return rand.NextDouble() * (max - min) + min;
         }
+
+        public static int RandomSign(this Random source)
+        {
+            return source.Next(2) * 2 - 1;
+        }
     }
 }

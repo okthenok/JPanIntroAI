@@ -48,14 +48,14 @@ namespace JPanIntroAI
                 {
                     if (rand.NextDouble() < rate)
                     {
-                        neuron.Bias = neuron.Bias + rand.NextDouble(-0.1, 0.1);
+                        neuron.Bias = neuron.Bias * rand.NextDouble(0.1, 2) * rand.RandomSign();
                     }
 
                     for (int w = 0; w < neuron.Weights.Length; w++)
                     {
                         if (rand.NextDouble() < rate)
                         {
-                            neuron.Weights[w] = neuron.Weights[w] + rand.NextDouble(-0.1, 0.1);
+                            neuron.Weights[w] = neuron.Weights[w] * rand.NextDouble(0.1, 2) * rand.RandomSign();
                         }
                     }
                 }
@@ -73,7 +73,7 @@ namespace JPanIntroAI
                 {
                     rowError += Math.Abs(Output[i] - desiredOutput[r][i]);
                 }
-                rowError /= input[r].Length;
+                rowError /= desiredOutput[r].Length;
                 mae += rowError;
             }
             return mae / input.Length;

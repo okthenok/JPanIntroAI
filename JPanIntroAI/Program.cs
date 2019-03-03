@@ -116,7 +116,10 @@ namespace JPanIntroAI
         */
         #endregion
 
-
+        static double Sigmoid(double input)
+        {
+            return 1.0 / (1 + Math.Exp(-input));
+        }
 
         static void Main(string[] args)
         {
@@ -185,10 +188,12 @@ namespace JPanIntroAI
             */
             #endregion
             #region Feed Foward Neural Network
-            Network[] population = new Network[100];
-            for (int i = 0; i < 100; i++)
+            Network[] population = new Network[1000];
+            for (int i = 0; i < 1000; i++)
             {
-                population[i] = new Network(a => 1 / (1 + Math.Exp(-a)), 2, 2, 1);
+                population[i] = new Network(a => a < 0 ? 0 : 1, 2, 2, 1);
+                //population[i] = new Network(Sigmoid, 2, 2, 1);
+                population[i].Randomize(rand);
             }
             double[][] inputs = new double[][]
             {
@@ -213,7 +218,7 @@ namespace JPanIntroAI
                 int cut = (int)(population.Length * 0.90);
                 for (int i = 1; i < cut; i++)
                 {
-                    population[i].Mutate(rand, 1);
+                    population[i].Mutate(rand, 0.25);
                 }
                 for (int i = cut; i < population.Length; i++)
                 {
@@ -234,7 +239,7 @@ namespace JPanIntroAI
                     double[] output = population[0].Compute(inputs[i]);
                     for (int j = 0; j < output.Length; j++)
                     {
-                        Console.Write($"{output[j]:#.00} ");
+                        Console.Write($"{output[j]:0.00} ");
                     }
                     Console.WriteLine("]");
                 }
@@ -243,8 +248,6 @@ namespace JPanIntroAI
             } while (population[0].MAE(inputs, xorOutputs) > 0);
 
             //run the network to test it
-
-            ;
             #endregion
         }
     }
